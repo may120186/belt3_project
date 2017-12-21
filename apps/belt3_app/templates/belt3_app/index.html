@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/login">Logout</a>
+    <h1>Hello, {{request.session.name}}!</h1>
+    <h3>Your Wish List:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Added By</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        {% for item in items %} 
+        <tr>
+            <td><a href="/wishes/info/{{item.id}}">{{item.item}}</a></td>
+            <td>{{item.created_by.name}}</td>
+            <td>{{item.created_at}}</td>
+            <td><a href="/wishes/remove/{{item.id}}">Remove from my Wishlist</a></td>
+            <td><a href="/wishes/delete/{{item.id}}">Delete</a></td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Other Users' Wish List</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>Item</td>
+                <td>Added By</td>
+                <td>Date Added</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        {% for item in other_items %}
+        <tr>
+            <td><a href="/wishes/info/{{item.id}}">{{item.item}}</a></td>
+            <td>{{item.created_by.name}}</td>
+            <td>{{item.created_at}}</td>
+            <td><a href="/wishes/addwish/{{item.id}}">Add To My Wish List</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/wishes/new">Add Item</a>
+
+    
+</body>
+</html>
